@@ -11,13 +11,10 @@
     ```$ source env/bin/activate```
 - Python-asennukset on tehtävä nimenomaan virtuaaliympäristöön ja asennuksia ei saa missään tapauksessa tehdä sudo-oikeuksilla:
     ```$ which pip /home/kayttaja/env/bin/pip```
-- Yksittäinen Python paketti lisätään tekstitiedostoon, esimerkiksi micro-editorilla, ja lopuksi testitiedosto ladataan pip-komennolla:
-    ```$ sudo apt-get install micro```,
+- Yksittäinen Python paketti lisätään tekstitiedostoon ja lopuksi testitiedosto ladataan pip-komennolla:
     ```$ micro requirements.txt # "django"```,
     ```$ cat requirements.txt```,
     ```$ pip install -r requirements.txt```
-- Käytössä olevan Django-version voi tarkistaa komennolla
-    ```$ django-admin --version```
 - Uusi web-projekti aloitetaan syöttämällä komento
     ```$ django-admin startproject yourproject```
 - Web-sivuston toimivuutta voidaan testata navigoimalla projektin kansioon ja laittamalla sivusto päälle komennolla
@@ -49,7 +46,7 @@
 
   class Customer(models.Model):
     name = models.CharField(max_length=300)
-- Sitten päivitettän tietokanta
+
 - Jotta tietokanna voi nähdä ylläpitäjän oikeuksilla, ylläpitäjä täytyy rekisteröidä:
     ```$ micro crm/admin.py```
 -    ```
@@ -57,7 +54,7 @@
      from . import models
 
      admin.site.register(models.Customer)
-- Sitten laitetaan serveri päälle ja tietokantaa voi tutkia ylläpitäjän oikeuksilla osoitteessa http://127.0.0.1:8000/admin/
+
 - Aluksi tietokanta näyttää asiakaslistan numeroina, mutta asiakkaan nimet voidaan laittaa näkyville muokkaamalla models.py-tiedostossa olevaa Customer luokkaa:
     ```
     from django.db import models
@@ -69,11 +66,7 @@
         return self.name	# tämä toiminto muuttaa asiakkaan arvon merkkijonoksi
 
 ### Deploy Django 4 - Production Install
-- Djangon voi ladata tuotantotyyppisesti luomalla Apache web palvelimen. Ensin ladataan Apache 2, jos sitä ei ole vielä asennettuna:
-    ```$ sudo apt-get -y install apache2```
-- Korvataan testisivu:
-    ```$ echo "Tekstiä"|sudo tee /var/www/html/index.html```
-- Sivustolle luodaan sisältöä menemällä käyttäjän juurihakemistoon ja  luomalla uudet hakemistot testisiältöä varten ja lisäämällä tekstiä:
+- Staattinen testisivu luodaan luomalla juurihakemistoon uusi hakemistopolku testisisältöä varten:
     ```
        $ cd
        $ mkdir -p publicwsgi/yoursite/static/
@@ -87,14 +80,7 @@
 		      Require all granted
 	      </Directory>
       </VirtualHost>
-- Laitetaan uusi sivu päälle ja laitetaan oletuksena oleva testisivu pois päältä:
-    ```
-    $ sudo a2ensite yoursite.conf
-    $ sudo a2dissite 000-default.conf
-- Testataan konfiguraation toimivuus:
-    ```$ /sbin/apache2ctl configtest```
-- Kun konfiguraatio toimii, käynnistetään Apache uudelleen:
-    ```$ sudo systemctl restart apache2```
+- Laitetaan uusi sivu päälle ja laitetaan oletuksena oleva testisivu pois päältä ja käynnistetään Apache uudelleen
 - Staattisten tiedostojen toimivuutta voidaan testata menemällä selaimella osoitteeseen http://localhost/static/ tai komentorivillä komennolla
     ```$ curl http://localhost/static/```
 - Seuraavaksi luodaan uusi VirtualEnv-ympäristö ja luodaan sille uusi hakemisto publicwsgi-kansioon:
@@ -105,23 +91,15 @@
     $ cd publicwsgi/
 
     $ virtualenv -p python3 --system-site-packages env
-
-- Kannataa lisätä system-site-packages -komentoon -p python3, jotta varmasti käytetään uusinta Python-versiota
 - Ladataan uusin Django versio laittamalla uusi virtuaaliympäristö päälle:
     ```$ source env/bin/activate```
-- Kannataa tarkistaa, että pip-asennusohjelma löytyy nimenomaan env/-hakemistosta
-    ```
-    $ which pip
-    /home/user/publicwsgi/env/bin/pip
-- Luodaan tekstitiedosto ja kirjoitetaan sinne django:
+- Djangon lataamista varten luodaan requirements.txt-tiedosto:
     ```
     $ micro requirements.txt
 
     django
 - Seuraavaksi ladataan tiedosto:
     ```$ pip install -r requirements.txt```
-- Tiedoston toimivuuden voi testata komennolla
-    ```$ django-admin --version```
 - Seuraavaksi luodaan uusi Django-projekti:
     ```$ django-admin startproject yourproject```
 - Yksinkertaisesta Django-projektista poiketen tässä esimerkissä on luotava kolme uutta hakemistopolkua, jotka ovat Django-projektin päähakemisto (TDIR), joka sisältää manage.py-tiedoston,
@@ -132,7 +110,6 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
 - Sivuston toimivuutta voidaan testata komentorivillä komennolla
     ```$ curl -s localhost|grep title``` ja voidaan testata, että onko kyseessä nimenomaan Apache-palvelin komennolla
     ```$ curl -sI localhost|grep Server```
-- Toimivuutta voi testata selaimessa menemällä localhost-osoitteeseen.
 
 ## a) Yksinkertainen Django-esimerkkiohjelma
 
@@ -146,7 +123,7 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
 ![Screenshot_2024-03-03_10-56-06.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_10-56-06.png)
 - Sitten loin requirements.txt-tiedoston micro-editorilla
 ![Screenshot_2024-03-03_11-01-05.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-01-05.png)
-- Latasin requirements.txt tiedoston ```pip install```-komennolla ja tarkistin vielä, minkä Django-version latasin ja lataamani versio oli Django 5-version.
+- Latasin requirements.txt tiedoston ```pip install```-komennolla ja tarkistin vielä, minkä Django-version latasin.
 ![Screenshot_2024-03-03_11-06-11.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-06-11.png)
 - Sitten loin jukkaco-nimisen projekti syöttämällä komennon
     ```django-admin startproject jukkaco```, navigoin projektin kansioon ja laitoin serverin päälle komennolla
@@ -157,11 +134,11 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
 - Seuraavaksi lähdin luomaan admin-rajapintaa. Syötin aluksi komennon
     ```./manage.py makemigrations```, joka tuotti ilmoituksen, josta kävi ilmi, että muutoksia ei ole havaittu. Sitten syötin ```./manage.py migrate```-komennon, joka tuotti pidemmän tulosteen uusista migraatioista
 ![Screenshot_2024-03-03_11-31-02.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-31-02.png)
-- Sitten aloin luomaan uutta käyttäjää. Latasin ensin salasagenerointiohjelman komennolla
+- Sitten aloin luomaan uutta käyttäjää. Latasin ensin salasanagenerointiohjelman komennolla
     ```$ sudo apt-get install pwgen``` ja loin sillä itselleni uuden salasanan
 - Sitten annoin uudelle käyttäjälle superuser-oikeudet komennolla
     ```$ ./manage.py createsuperuser```. Sitten minun piti syöttää käyttäjän tiedot ja jätin käyttäjänimiosion tyhjäksi ja siten käyttäjänimekseni tuli automaattisesti virtuaalikoneeni pääkäyttäjän tunnus. Sitten syötin sähköpostiosoitteen ja juuri generoimani salasanan.
-- Kun superuser oli luotu, käynnistin serverin uudelleen ja menin selaimessa osoitteeseen 127.0.0.1:8000/admin/ ja siellä näkyi kirjautumissivu
+- Kun superuser oli luotu, käynnistin serverin uudelleen ja menin selaimessa osoitteeseen 127.0.0.1:8000/admin/
 ![Screenshot_2024-03-03_11-43-07.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-43-07.png)
 - Testasin vielä sisäänkirjautumista luomallani käyttäjätunnuksella ja se toimi
 ![Screenshot_2024-03-03_12-05-48.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-05-48.png)
