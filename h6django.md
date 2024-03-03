@@ -182,6 +182,9 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
 
 ## b) Djangon tuotantotyyppinen asennus
 
+- Aloin tekemään Djangon tuotantotyyppistä asennusta seuraamalla Tero Karvisen ohjetta https://terokarvinen.com/2022/deploy-django/. Tehtävää varten tarvittavan Apache 2 web-palvelimen olin jo asentanut aiemmin ja olin korvannut Apachen testisivun omalla tekstillä.
+- Loin omaan kotihakemistooni uuden staattisen web-sivun syöttämällä komennon
+    
 
   
   
