@@ -143,6 +143,45 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
 - Seuraavaksi laitoin virtuaaliympäristön päälle komennolla
     ```$ source env/bin/activate```. Tarkistin vielä, että lataukset tapahtuvat varmasti virtuaaliympäristöön syöttämällä komennon
     ```$ which pip``` ja komennon tuottama tuloste osoitti, että olen oikeassa ympäristössä.
+![Screenshot_2024-03-03_10-56-06.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_10-56-06.png)
+- Sitten loin requirements.txt-tiedoston micro-editorilla
+![Screenshot_2024-03-03_11-01-05.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-01-05.png)
+- Latasin requirements.txt tiedoston ```pip install```-komennolla ja tarkistin vielä, minkä Django-version latasin ja lataamani versio oli Django 5-version.
+![Screenshot_2024-03-03_11-06-11.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-06-11.png)
+- Sitten loin jukkaco-nimisen projekti syöttämällä komennon
+    ```django-admin startproject jukkaco```, navigoin projektin kansioon ja laitoin serverin päälle komennolla
+    ```./manage.py runserver```.
+![Screenshot_2024-03-03_11-18-51.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-18-51.png)
+- Menin selaimessa serverin osoitteeseen ja siellä näkyi Djangon testisivu eli sovellus toimi
+![Screenshot_2024-03-03_11-13-28.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-13-28.png)
+- Seuraavaksi lähdin luomaan admin-rajapintaa. Syötin aluksi komennon
+    ```./manage.py makemigrations```, joka tuotti ilmoituksen, josta kävi ilmi, että muutoksia ei ole havaittu. Sitten syötin ```./manage.py migrate```-komennon, joka tuotti pidemmän tulosteen uusista migraatioista
+![Screenshot_2024-03-03_11-31-02.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-31-02.png)
+- Sitten aloin luomaan uutta käyttäjää. Latasin ensin salasagenerointiohjelman komennolla
+    ```$ sudo apt-get install pwgen``` ja loin sillä itselleni uuden salasanan
+- Sitten annoin uudelle käyttäjälle superuser-oikeudet komennolla
+    ```$ ./manage.py createsuperuser```. Sitten minun piti syöttää käyttäjän tiedot ja jätin käyttäjänimiosion tyhjäksi ja siten käyttäjänimekseni tuli automaattisesti virtuaalikoneeni pääkäyttäjän tunnus. Sitten syötin sähköpostiosoitteen ja juuri generoimani salasanan.
+- Kun superuser oli luotu, käynnistin serverin uudelleen ja menin selaimessa osoitteeseen 127.0.0.1:8000/admin/ ja siellä näkyi kirjautumissivu
+![Screenshot_2024-03-03_11-43-07.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_11-43-07.png)
+- Testasin vielä sisäänkirjautumista luomallani käyttäjätunnuksella ja se toimi
+![Screenshot_2024-03-03_12-05-48.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-05-48.png)
+- Sitten lähdin luomaan asiakastietokantaa. Loin ensi uuden crm/-kansion komennolla
+    ```$ ./manage.py startapp crm``` ja sen jälkeen kävin lisäämässä sen settings.py-tiedoston INSTALLED_APPS-osioon
+![Screenshot_2024-03-03_12-12-03.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-12-03.png)
+- Sitten loin crm/-kansioon uuden models.py-tiedoston, johon loin uuden Customer-luokan asiakastietoja varten
+![Screenshot_2024-03-03_12-18-34.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-18-34.png)
+- Sitten syötin ```./manage.py makemigrations```-komennon, joka näytti tekemäni muutokset ja sitten syötin ```./manage.py migrate```-komennon, joka tallensi muutokset.
+- Sitten rekisteröin admin-käyttäjäni
+![Screenshot_2024-03-03_12-29-44.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-29-44.png)
+- Laitoin serverin päälle ja kirjauduin sisään ja Customers-osio oli ilmestynyt näkyviin. Lisäsin vielä testinä kaksi uutta asiakasta
+![Screenshot_2024-03-03_12-36-33.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-36-33.png)
+- Koska halusin saada asiakkaiden nimet näkyviin numeroarvojen sijasta, kävin vielä muokkaamassa models.py tiedostoa
+![Screenshot_2024-03-03_12-44-13.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-44-13.png)
+- Muutosten jälkeen asiakkaiden nimet näkyivät tietokannassa
+![Screenshot_2024-03-03_12-46-25.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_12-46-25.png)
+
+## b) Djangon tuotantotyyppinen asennus
+
 
   
   
