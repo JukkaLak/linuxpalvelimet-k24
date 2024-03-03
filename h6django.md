@@ -134,6 +134,16 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
     ```$ curl -sI localhost|grep Server```
 - Toimivuutta voi testata selaimessa menemällä localhost-osoitteeseen.
 
+## a) Yksinkertainen Django-esimerkkiohjelma
+
+- Aloin tekemään yksinkertaista Django-ohjelmaa seuraamalla Tero Karvisen tekemää ohjetta https://terokarvinen.com/2022/django-instant-crm-tutorial/. Ensimmäiseksi latasin virtuaalikoneelleni uuden virtuaalisen työympäristön syöttämällä komennon
+    ```$ sudo apt-get -y install virtualenv```.
+- Seuraavaksi syötin komennon
+    ```$ virtualenv --system-site-packages -p python3 env/```, joka loi uuden env/-kansion, joka sisältää kaikki viimeisimmät system-site-packages -kirjaston paketit. Varmistin myös, että lataan varmasti Python3-version paketit krijoittamalla komentoon python3, jotta en vahingossa sattuisi lataamaan vanhojen Python-versioiden paketteja.
+- Seuraavaksi laitoin virtuaaliympäristön päälle komennolla
+    ```$ source env/bin/activate```. Tarkistin vielä, että lataukset tapahtuvat varmasti virtuaaliympäristöön syöttämällä komennon
+    ```$ which pip``` ja komennon tuottama tuloste osoitti, että olen oikeassa ympäristössä.
+
   
   
 
