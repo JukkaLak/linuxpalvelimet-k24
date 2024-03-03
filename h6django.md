@@ -183,8 +183,32 @@ polku wsgi.py- tiedostoon (TWSGI) ja polku virtualenvin site-packages -tiedostoo
 ## b) Djangon tuotantotyyppinen asennus
 
 - Aloin tekemään Djangon tuotantotyyppistä asennusta seuraamalla Tero Karvisen ohjetta https://terokarvinen.com/2022/deploy-django/. Tehtävää varten tarvittavan Apache 2 web-palvelimen olin jo asentanut aiemmin ja olin korvannut Apachen testisivun omalla tekstillä.
-- Loin omaan kotihakemistooni uuden staattisen web-sivun syöttämällä komennon
-    
+- Loin omaan kotihakemistooni uuden hakemistopolun uutta staattista web-sivua varten komennolla
+    ```$ mkdir -p publicwsgi/jukkaco/static/``` ja korvasin testisivun komennolla
+    ```$ echo "Static site"|tee publicwsgi/jukkaco/static/index.html```
+- Sitten lisäsin uuden VirtualHostin
+![Screenshot_2024-03-03_14-26-08.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_14-26-08.png)
+- Laitoin web-sivun päälle komennolla
+    ```$ sudo a2ensite jukkaco.conf``` ja testasin ```/sbin/apache2ctl configtest```-komennolla sivun syntaksin toimivuutta ja syntaksi oli ok.
+- Käynnistin Apachen uudelleen ja testasin staattisen web-sivun toimivuutta selaimessa osoitteessa http://localhost/static/ ja se toimi
+![Screenshot_2024-03-03_14-29-38.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_14-29-38.png)
+- Sitten aloin luomaan uutta virtuaalityöympäristöä. Navigoin publicwsgi/-kansioon ja loin sinne uuden hakemiston virtuaaliympäristöä varten komennolla
+    ```$ virtualenv -p python3 --system-site-packages env```
+- Sitten laitoin virtuaaliympäristön päälle ja tarkistin vielä varmuuden vuoksi, että olen oikeassa hakemistossa
+![Screenshot_2024-03-03_14-49-23.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_14-49-23.png)
+- Sitten loin uuden requirements.txt tiedoston Djangoa varten ja latasin sen samaan tapaan kuin edellisessä harjoituksessa
+![Screenshot_2024-03-03_14-53-16.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_14-53-16.png)
+- Aloin luomaan uutta Django-projektia ja käytin siinä pohjana aiemmassa harjoituksessa tekemääni jukkaco-projektia.
+- Aloin yhdistämään Pythonia Apacheen muokkaamalla jukkaco.conf-tiedostoa siten, että määritin sinne hakemistopolut Django-projektin päähakemistoon, wsgi.py-tiedostoon ja virtualenvin site-packages -kansioon
+![Screenshot_2024-03-03_15-30-55.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_15-30-55.png)
+- Tämän jälkeen latasin Apachen WSGI-moduulin syöttämällä komennon
+    ```sudo apt-get -y install libapache2-mod-wsgi-py3```
+- Seuraavaksi tein cofigtest-komennon ja siitä kävi ilmi, että jukkaco.conf-tiedostossa oli syntaksivirhe ja korjasin sen ja korjauksen jälkeen tein configtest-komennon uudelleen ja syntaksi oli ok.
+- Käynnistin Apachen uudelleen ja tämän jälkeen testasin web-sivuni toimivuutta
+    ```curl -s localhost|grep title```-komennolla ja se tulosti seuraavan virheilmoituksen:
+![Screenshot_2024-03-03_15-50-29.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-03_15-50-29.png)
+- En saanut raporttia tehdessä tätä ongelmaa ratkaistua ja tehtävä jäi tältä osin kesken
+
 
   
   
