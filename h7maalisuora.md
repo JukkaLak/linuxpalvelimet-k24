@@ -37,7 +37,10 @@
 ![Screenshot_2024-03-10_18-13-57.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_18-13-57.png)
 - Luodaan uusi käyttäjä erkki:
 ![Screenshot_2024-03-10_18-26-04.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_18-26-04.png)
-- 
+- Yritin vielä luoda uudelle käyttäjälle uutta kotisivua, mutta se ei onnistunut ja minulla loppui aika ja kärsivällisyys, joten tehtävä jäi jälleen kesken.
+
+## d) Uusi virtuaalikone labraharjoitusta varten
+- Loin tulevaa labraharjoitusta varten uuden virtuaalikoneen samaan tapaan kuin aiemmin kurssilla eli käyttöliittymäksi 64 bittinen Debian 12, muistia 4000 MB:ta ja 60 GB:n kovalevy. Alkuasetusten teon jälkeen tein päivitykset ja latasin palomuurin.
 
 
 
