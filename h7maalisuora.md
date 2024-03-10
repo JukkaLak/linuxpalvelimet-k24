@@ -18,7 +18,7 @@
 ![Screenshot_2024-03-10_12-45-10.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_12-45-10.png)
 
 ## c) Labraharjoitus
-
+- Tein harjoitusmielessä vanhan laboratoriokokeen viime vuoden Linux-palvelimet kurssilta (https://terokarvinen.com/2023/linux-palvelimet-2023-arvioitava-laboratorioharjoitus/?fromSearch=laboratorioharjoitus). Loin tehtävää varten uuden tyhjän virtuaalikoneen ja tein sille normaalit alkuasetukset ja asensin päivitystiedostot ja palomuurin sekä micro-editorin. 
 
 
 
