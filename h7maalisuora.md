@@ -7,4 +7,18 @@
 ![Screenshot_2024-03-09_13-22-37.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-09_13-22-37.png)
 
 ## b) Uusi komento Linuxiin
+- Tein uuden komennon Linuxiin samalla tavalla kuin tunnilla näytettiin esimerkkinä eli komento tulostaa tervehdyksen, koneeni käyttäjänimen, koneen nimen ja päivämäärätiedot.
+![Screenshot_2024-03-10_12-13-05.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_12-13-05.png)
+- Testasin komentoa bash-komennolla
+![Screenshot_2024-03-10_12-20-18.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_12-20-18.png)
+- Annoin komennolle execute-oikeudet komennolla    ```chmod +x tervehdys.sh```
+- Lisäsin komennon /usr/local/bin-polkuun syöttämällä komennon
+    ```sudo mv tervehdys.sh /usr/local/bin/tervehdys```
+- Testasin parissa eri kansiossa, toimiiko komento ja se toimi. Seuraavassa kuvassa testitapaus Documents-kansiossa:
+![Screenshot_2024-03-10_12-45-10.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_12-45-10.png)
+
+## c) Labraharjoitus
+
+
+
 
