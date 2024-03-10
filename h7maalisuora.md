@@ -20,7 +20,26 @@
 ## c) Labraharjoitus
 - Tein harjoitusmielessä vanhan laboratoriokokeen viime vuoden Linux-palvelimet kurssilta (https://terokarvinen.com/2023/linux-palvelimet-2023-arvioitava-laboratorioharjoitus/?fromSearch=laboratorioharjoitus). Loin tehtävää varten uuden tyhjän virtuaalikoneen ja tein sille normaalit alkuasetukset ja asensin päivitystiedostot, palomuurin sekä micro-editorin.
 - Jätin harjoitusta tehdessäni välistä a)-, b)- ja c)-osat, koska ne eivät olleet olennaisia harjoitusluontoista tehtävää tehdessä ja aloitin kohdasta d), jossa piti luoda uusi komento kaikkien käyttäjien käytettäväksi.
+### Uusi Linux-komento
+- Tein uuden komennon Linuxiin samalla kaavalla kuin aiemmin tässä tehtävässä eli loin komennolle uuden tiedoston hey.sh
+![Screenshot_2024-03-10_17-02-12.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_17-02-12.png)
+- Testasin sitä bash-komennolla:
+![Screenshot_2024-03-10_17-06-47.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_17-06-47.png)
+- Annoin execute-oikeudet:    ```chmod +x hey.sh```
+- Komento uuteen polkuun:    ```sudo mv hey.sh /usr/local/bin/hey```
+- Testasin komennon ja se toimi
+![Screenshot_2024-03-10_17-37-44.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_17-37-44.png)
+### Apache web-palvelimen asennus
+- Seuraavaksi aloin tekemään laboratorioharjoituksen kohtaa f), jossa piti asentaa Apache web-palvelin ja luoda sinne uusi käyttäjä Erkki Esimerkki ja käyttäjälle uusi kotisivu
+- Asensin Apachen:    ```$sudo apt-get install apache2```
+- Apache päälle:    ```$sudo systemctl enable apache2 --now```
+- Apachen testisivu tuli näkyviin localhostiin
+![Screenshot_2024-03-10_18-13-57.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_18-13-57.png)
+- Luodaan uusi käyttäjä erkki:
+![Screenshot_2024-03-10_18-26-04.png](https://github.com/JukkaLak/linuxpalvelimet-k24/blob/main/Screenshot_2024-03-10_18-26-04.png)
 - 
+
+
 
 
 
